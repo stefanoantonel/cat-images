@@ -18,6 +18,9 @@ const config = {
 		}),
 		alias: {
 			'@': './src'
+		},
+		paths: {
+			base: process.env.BASE_PATH || ''
 		}
 	}
 };

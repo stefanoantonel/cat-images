@@ -47,16 +47,14 @@ jobs:
         uses: actions/configure-pages@v4
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
-      - name: Check linter
+      - name: Check linter & prettier
         run: ${{ steps.detect-package-manager.outputs.manager }} run lint
-      - name: Check prettier
-        run: ${{ steps.detect-package-manager.outputs.manager }} run prettier:check
       - name: Run tests
         run: ${{ steps.detect-package-manager.outputs.manager }} run test
       - name: Build
         env:
           BASE_PATH: '/${{ github.event.repository.name }}'
-        run: env && ${{ steps.detect-package-manager.outputs.runner }} next build
+        run: env && ${{ steps.detect-package-manager.outputs.manager }} run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
