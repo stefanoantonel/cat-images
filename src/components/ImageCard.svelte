@@ -1,17 +1,49 @@
 <script lang="ts">
-	import type { CatResponse } from '../types/api';
+	import { onMount } from 'svelte';
+
+	import type { CatResponse } from '@/types/api';
+	import { images } from '@/state/store';
+	import { placeholderImgUrl } from '@/constants/api';
 
 	type Props = {
-		catInfo: CatResponse | null;
+		index: number;
 	};
-	let { catInfo }: Props = $props();
+	let { index }: Props = $props();
+
+	let catInfo = $state<CatResponse | null>(null);
+	let loaded = $state(false);
+
+	onMount(() => {
+		images.subscribe((imgResponse) => {
+			catInfo = imgResponse?.[index] || null;
+		});
+	});
 </script>
 
-<img
-	height="200px"
-	style="object-fit: cover"
-	src={catInfo?.url}
-	loading="lazy"
-	width="300px"
-	alt="cat"
-/>
+<div class="img-swap-container">
+	<img src={placeholderImgUrl} alt="placeholder" class={loaded ? 'hidden' : 'cat-image'} />
+
+	<img
+		class={loaded ? 'cat-image' : 'hidden'}
+		src={catInfo?.url}
+		loading="lazy"
+		alt="cat"
+		onload={() => (loaded = true)}
+	/>
+</div>
+
+<style>
+	.cat-image {
+		object-fit: cover;
+		max-height: 200px;
+		width: 100%;
+	}
+	.img-swap-container {
+		height: 200px;
+		width: 300px;
+		overflow: hidden;
+	}
+	.hidden {
+		max-height: 0;
+	}
+</style>

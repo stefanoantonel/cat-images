@@ -1,16 +1,13 @@
-import { readable } from 'svelte/store';
+import { writable } from 'svelte/store';
 
-import { imageApiUrl } from '../constants/api';
-import type { CatResponse } from '../types/api';
+import type { CatResponse } from '@/types/api';
 
-export const images = readable<null | CatResponse[]>(null, (set) => {
-	fetch(imageApiUrl)
-		.then((r) => r.json())
-		.then((catResponse) => {
-			console.log(`catResponse >>>`, catResponse);
-			set(catResponse);
-		})
-		.catch((e) => {
-			console.error(e);
-		});
-});
+const increment = 10;
+
+export const totalCount = writable<number>(increment);
+
+export const images = writable<CatResponse[] | []>([]);
+
+export function loadMore() {
+	totalCount.update((count) => count + increment);
+}
