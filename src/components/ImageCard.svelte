@@ -26,7 +26,6 @@
 	<img
 		class={loaded ? 'cat-image' : 'hidden'}
 		src={catInfo?.url}
-		loading="lazy"
 		alt="cat"
 		onload={() => (loaded = true)}
 	/>
@@ -45,5 +44,6 @@
 	}
 	.hidden {
 		max-height: 0;
+		transition: max-height 0.5s linear;
 	}
 </style>

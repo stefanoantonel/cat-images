@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 
 	import { fetchCats } from '@/helpers/fetcher';
-	import { totalCount, images, loadMore } from '@/state/store';
+	import { totalCount, images } from '@/state/store';
 	import ImageCard from './ImageCard.svelte';
 
 	let totalCountLocal = $state<number>(0);
@@ -13,7 +13,6 @@
 	});
 
 	const loadMoreHandler = async () => {
-		loadMore();
 		const catInfo = await fetchCats();
 		if (!catInfo) return;
 
@@ -25,8 +24,6 @@
 	});
 </script>
 
-<h2 class="header">Cuttest cats</h2>
-
 <div class="container">
 	{#each new Array(totalCountLocal) as _, i (i)}
 		<ImageCard index={i} />
@@ -36,18 +33,23 @@
 <button onclick={loadMoreHandler} class="load-more-button">Load more</button>
 
 <style>
-	.header {
-		text-align: center;
-	}
 	.container {
-		display: flex;
-		gap: 20px;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, 300px); /* 2 */
+		gap: 40px;
 		flex-wrap: wrap;
-		justify-content: center;
-		align-items: center;
+		justify-content: space-around;
 	}
 	.load-more-button {
 		display: block;
 		margin: 10px auto;
+		background-color: #aa8749;
+		color: white;
+		padding: 10px 20px;
+		border: 0;
+	}
+	.load-more-button:hover {
+		background-color: #aa874999;
+		cursor: pointer;
 	}
 </style>
