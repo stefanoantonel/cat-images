@@ -4,12 +4,15 @@
 	import { fetchCats } from '@/helpers/fetcher';
 	import { totalCount, images } from '@/state/store';
 	import ImageCard from './ImageCard.svelte';
+	import Loader from './Loader.svelte';
 
 	let totalCountLocal = $state<number>(0);
+	let bottomSection: Element; // for intersection observer
 
 	onMount(async () => {
 		const catInfo = await fetchCats();
 		images.set(catInfo || []);
+		setupObserver();
 	});
 
 	const loadMoreHandler = async () => {
@@ -22,6 +25,11 @@
 	totalCount.subscribe((count) => {
 		totalCountLocal = count;
 	});
+
+	const setupObserver = () => {
+		const observer = new IntersectionObserver(loadMoreHandler);
+		observer.observe(bottomSection);
+	};
 </script>
 
 <div class="container">
@@ -30,7 +38,9 @@
 	{/each}
 </div>
 
-<button onclick={loadMoreHandler} class="load-more-button">Load more</button>
+<div class="bottom-section" bind:this={bottomSection}>
+	<Loader />
+</div>
 
 <style>
 	.container {
@@ -40,16 +50,7 @@
 		flex-wrap: wrap;
 		justify-content: space-around;
 	}
-	.load-more-button {
-		display: block;
-		margin: 10px auto;
-		background-color: #aa8749;
-		color: white;
-		padding: 10px 20px;
-		border: 0;
-	}
-	.load-more-button:hover {
-		background-color: #aa874999;
-		cursor: pointer;
+	.bottom-section {
+		height: 100px;
 	}
 </style>
