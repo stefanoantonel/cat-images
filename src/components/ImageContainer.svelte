@@ -35,7 +35,7 @@
 <style>
 	.container {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, 300px); /* 2 */
+		grid-template-columns: repeat(auto-fill, 300px);
 		gap: 40px;
 		flex-wrap: wrap;
 		justify-content: space-around;

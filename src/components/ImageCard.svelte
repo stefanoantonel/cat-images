@@ -21,10 +21,14 @@
 </script>
 
 <div class="img-swap-container">
-	<img src={placeholderImgUrl} alt="placeholder" class={loaded ? 'hidden' : 'cat-image'} />
+	<img
+		src={placeholderImgUrl}
+		alt="placeholder"
+		class={loaded ? 'placeholder-image' : 'cat-image'}
+	/>
 
 	<img
-		class={loaded ? 'cat-image' : 'hidden'}
+		class={loaded ? 'cat-image' : 'placeholder-image'}
 		src={catInfo?.url}
 		alt="cat"
 		onload={() => (loaded = true)}
@@ -36,14 +40,14 @@
 		object-fit: cover;
 		max-height: 200px;
 		width: 100%;
+		transition: max-height 0.5s ease-out;
 	}
 	.img-swap-container {
 		height: 200px;
 		width: 300px;
 		overflow: hidden;
 	}
-	.hidden {
+	.placeholder-image {
 		max-height: 0;
-		transition: max-height 0.5s linear;
 	}
 </style>

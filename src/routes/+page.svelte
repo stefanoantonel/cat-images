@@ -2,35 +2,22 @@
 	import ImageContainer from '@/components/ImageContainer.svelte';
 </script>
 
-<h2 class="header">Discover the Cuttest cat images</h2>
+<header>Discover the cuttest cats</header>
 
-<div class="app-content">
-	<ImageContainer />
-</div>
-
-<div class="footer">App created with Svelte5</div>
+<ImageContainer />
 
 <style>
-	.header {
+	header {
 		text-align: center;
 		background-color: #aa8749;
 		color: white;
 		font-style: italic;
-		padding: 10px;
+		padding: 30px;
 		height: 30px;
+		font-size: 1.5rem;
 	}
-	.app-content {
-		/* full - header - footer */
-		height: calc(100vh - 140px);
-		overflow-y: auto;
-	}
-	.footer {
-		height: 20px;
+	:global(body) {
+		margin: 0;
 		background-color: #aa874955;
-		color: gray;
-		text-align: center;
-		padding: 10px 0;
-		line-height: 20px;
-		font-size: small;
 	}
 </style>
