@@ -37,18 +37,24 @@
 </div>
 
 <style>
-	.cat-image {
-		object-fit: cover;
-		max-height: 200px;
-		width: 100%;
-		transition: max-height 0.5s ease-out;
-	}
 	.img-swap-container {
+		display: grid;
 		height: 200px;
 		width: 300px;
 		overflow: hidden;
 	}
+	.img-swap-container img {
+		grid-area: 1 / 1;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: opacity 1.5s ease-in-out;
+	}
+	.cat-image {
+		opacity: 1;
+	}
 	.placeholder-image {
-		max-height: 0;
+		opacity: 0;
+		pointer-events: none;
 	}
 </style>

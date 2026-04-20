@@ -27,7 +27,9 @@
 	});
 
 	const setupObserver = () => {
-		const observer = new IntersectionObserver(loadMoreHandler);
+		const observer = new IntersectionObserver(loadMoreHandler, {
+			rootMargin: '0px 0px 300px 0px'
+		});
 		observer.observe(bottomSection);
 	};
 </script>
