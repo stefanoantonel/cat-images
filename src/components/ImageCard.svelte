@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 
 	import type { CatResponse } from '@/types/api';
+	import { base } from '$app/paths';
 	import { images } from '@/state/store';
 	import { placeholderImgUrl } from '@/constants/api';
 
@@ -22,7 +23,7 @@
 
 <div class="img-swap-container">
 	<img
-		src={placeholderImgUrl}
+		src={`${base}/${placeholderImgUrl}`}
 		alt="placeholder"
 		class={loaded ? 'placeholder-image' : 'cat-image'}
 	/>
