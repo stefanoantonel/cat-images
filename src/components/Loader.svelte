@@ -1,37 +1,30 @@
-<span class="loader"></span>
+<div class="loader"></div>
 
 <style>
 	.loader {
-		width: 48px;
-		height: 48px;
-		display: inline-block;
-		position: relative;
+		width: calc(6 * 30px);
+		height: 50px;
+		display: flex;
+		color: #8d7958;
+		filter: drop-shadow(30px 25px 0 currentColor) drop-shadow(60px 0 0 currentColor)
+			drop-shadow(120px 0 0 currentColor);
+		clip-path: inset(0 100% 0 0);
+		animation: l12 2s infinite steps(7);
 	}
-	.loader::after,
-	.loader::before {
+	.loader:before {
 		content: '';
-		box-sizing: border-box;
-		width: 48px;
-		height: 48px;
-		border-radius: 50%;
-		border: 2px solid #fff;
-		position: absolute;
-		left: 0;
-		top: 0;
-		animation: animloader 2s linear infinite;
+		width: 30px;
+		height: 25px;
+		--c: no-repeat radial-gradient(farthest-side, currentColor 92%, #0000);
+		background:
+			var(--c) left / 70% 70%,
+			var(--c) right/20% 20%,
+			var(--c) top 0 right 15%/20% 20%,
+			var(--c) bottom 0 right 15%/20% 20%;
 	}
-	.loader::after {
-		animation-delay: 1s;
-	}
-
-	@keyframes animloader {
-		0% {
-			transform: scale(0);
-			opacity: 1;
-		}
+	@keyframes l12 {
 		100% {
-			transform: scale(1);
-			opacity: 0;
+			clip-path: inset(0 -30px 0 0);
 		}
 	}
 </style>

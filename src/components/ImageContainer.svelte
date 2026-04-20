@@ -48,11 +48,15 @@
 	.container {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, 300px);
-		gap: 40px;
+		gap: 20px;
 		flex-wrap: wrap;
 		justify-content: space-around;
 	}
 	.bottom-section {
 		height: 100px;
+		display: flex;
+		justify-content: center;
+		height: 100px;
+		margin-top: 30px;
 	}
 </style>
