@@ -21,7 +21,17 @@
 	});
 </script>
 
-<div class="img-swap-container">
+<div
+	class="img-swap-container"
+	onclick={() => catInfo?.url && window.open(catInfo.url, '_blank')}
+	role="button"
+	tabindex="0"
+	onkeydown={(e) => {
+		if ((e.key === 'Enter' || e.key === ' ') && catInfo?.url) {
+			window.open(catInfo.url, '_blank');
+		}
+	}}
+>
 	<img
 		src={`${base}/${placeholderImgUrl}`}
 		alt="placeholder"
@@ -42,6 +52,14 @@
 		height: 200px;
 		width: 300px;
 		overflow: hidden;
+		border-radius: 12px;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+		transition: box-shadow 0.3s ease;
+		cursor: pointer;
+	}
+
+	.img-swap-container:hover {
+		box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
 	}
 	.img-swap-container img {
 		grid-area: 1 / 1;
